@@ -4,7 +4,7 @@
 Admin account email sosinasisay30@gmail.com
 | No | Name | ID |Section|
 | ------ | ------ | ------ |------ |
-|1| Meazi Taele | UGR/6378/14| 2|
+|1| Meaza Tadele | UGR/6378/14| 2|
 |2| Sosina Sisay| UGR/0131/14| 2|
 |3| Rediet Woudma | UGR/4779/14| 2|
 |4| Liya Daniel| UGR/5670/14| 2|
