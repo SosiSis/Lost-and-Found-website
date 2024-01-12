@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="dist/output.css" rel ="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body class="bg-blue-600">
+    <header class="flex items-center justify-between p-4 bg-gray-200">
+        <div class="flex items-center">
+            <h1 class="text-xl font-bold">Lost and Found</h1>
+        </div>
+        
+       
+        <nav class="flex items-center space-x-4 md:space-x-8">
+            <a href="report.html" class="hidden md:block">Report Lost</a>
+            <a href="accountUser.html" class="hidden md:block">Dashboard</a>
+            <div class="md:hidden">
+                <button type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </button>
+            </div>
+        </nav>
+        
+
+    </header>
+
+
+    <div class="flex items-center justify-center min-h-screen container mx-auto">
+        <div class = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="card">
+    
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            getCards();
+        });
+
+        function getCards() {
+            fetch('http://localhost:3000/items')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const cardContainer = document.getElementById('card');
+                    cardContainer.innerHTML = ''; // Clear existing content
+
+                    data.forEach(item => {
+                        const imageBuffer = item.picture.data; // Assuming the image data is in the "data" property of the "picture" object
+
+                        // Create a Blob from the buffer data
+                        const blob = new Blob([new Uint8Array(imageBuffer)], { type: 'image/jpeg' });
+
+                        // Generate temporary URL for the image
+                        const imageUrl = URL.createObjectURL(blob);
+
+                        const card = document.createElement('div');
+                        card.className = 'card shadow-lg ';
+                        card.innerHTML = `
+                            <div class="p-5 flex flex-col gap-5">
+                                <div class="rounded-xl overflow-hidden">
+                                    <img src="${imageUrl}" class='w-3/4' />
+                                </div>
+                                <div>
+                                    <p>${item.description}</p> <!-- Display the description -->
+                                </div>
+                            </div>
+                        `;
+
+                        cardContainer.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Failed to fetch data:', error);
+                });
+        }
+    </script>
+</body>
+</html>
