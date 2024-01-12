@@ -22,6 +22,7 @@ Administrators enjoy a comprehensive set of CRUD features designed to efficientl
 #### Tailwind
 #### HTML
 #### css
+#### TypeScript
 
 # Database Technology
 #### Mongo DB
@@ -96,8 +97,8 @@ USER
     user can create an account 
     user can log in 
     user can update their profile
-    user without an account can see images of found items 
-    user with an account can see the images of found items and their descriptions.
+    user without an account can see images of lost items 
+    user with an account can see the images of lost items and their descriptions.
 
 # The CRUD features
 
