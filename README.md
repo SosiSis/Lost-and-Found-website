@@ -108,8 +108,6 @@ USER
 5. Admin can edit descriptions on found items.
 6. Admin can also post found items.
 
-## Learn More
-
 
 # constraints 
 
@@ -118,6 +116,6 @@ USER
      ADMIN_EMAIL = admin@gmail.com
      ADMIN_PASSWORD = admin123
  
-
+## Learn More
 You can learn more about Nest js at the website
 * [Nestjs Documentation](https://docs.nestjs.com/) - Learn about Next.js features and API
