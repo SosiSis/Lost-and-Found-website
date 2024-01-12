@@ -19,12 +19,14 @@ Administrators enjoy a comprehensive set of CRUD features designed to efficientl
 
 
 # Technology for Frontend
-## Tailwind
-## HTML
-## css
+#### Tailwind
+#### HTML
+#### css
 
+# Database Technology
+#### Mongo DB
 
-# Why we used Mongo DB
+## Why we used Mongo DB
 MongoDB is a suitable choice for a lost and found website due to its flexible and scalable data model, document-oriented storage, fast querying capabilities, high availability and easy integration with JavaScript and web technologies, and a supportive community. With MongoDB, you can store and manage diverse lost and found item data easily with schemas, efficiently search and filter items based on various criteria, and benefit from seamless JavaScript integration. Considering your specific requirements will help determine if MongoDB is the right fit for your lost and found website.
 
 
@@ -32,10 +34,6 @@ MongoDB is a suitable choice for a lost and found website due to its flexible an
 
 
 # Nestjs
-
-
-## Before getting started
-
 
 
 ## Getting started
@@ -98,14 +96,14 @@ USER
     user can create an account 
     user can log in 
     user can update their profile
-    user without an account can see images of lost items 
-    user with an account can see the images of lost items and their descriptions.
+    user without an account can see images of found items 
+    user with an account can see the images of found items and their descriptions.
 
 # The CRUD features
 
 1. User, either with or without an account can see the found items on their dashboard.
 2. User with an account can post items they have found with descriptions and images.
-3. Admin can also see all of the lost items on their dashboard
+3. Admin can also see all of the found items on their dashboard
 4. Admin can delete items a user has posted after they have been claimed by their owners.
 5. Admin can edit descriptions on found items.
 6. Admin can also post found items.
