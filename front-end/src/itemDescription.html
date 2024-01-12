@@ -4,33 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Description</title>
-    <link href="dist/output.css" rel="stylesheet">
+    <link href="output.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="bg-gray-900 text-indigo-100 px-4 py-6 ">
-       
-       
-        <div class="flex justify-between w-full ">
-            
-            <h3 class="text-gray-50 px-4 py-4  ">Lost and Found</h3>
-            <div class="hidden lg:block xl:block lg:flex lg:justify-around xl:flex xl:justify-around  " id="menu">
-                <input type="text">
-                <p>dashboard</p>
-                <img src="" alt="">
-            </div>
-            <div class="flex justify-end px-4 py-4  cursor-pointer lg:hidden" id="burger">
-                <svg class="text-indigo-100 w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px" class="w-6 h-6">
-                    <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-                  </svg>
-                  
-    
-            </div>
-            
+    <header class="bg-black flex justify-between items-center p-4 rounded-tr">
+        <div class="flex items-center">
+          <h1 class="text-white text-lg font-bold">Lost and Found</h1>
+          <div class="ml-4">
+            <input type="text" placeholder="Find something" class="py-2 px-4 rounded-lg text-black">
+          </div>
         </div>
-        
-        
-
-    </header>
+        <div class="flex items-center">
+            <a href="#" class=" text-white font-semibold hover:underline">Report Lost</a>
+            <a href="#" class="ml-4 text-green-500 hover:underline">Dashboard</a>
+          <div class="ml-4">
+            <img src="Assets/profile.jpg" alt="Profile Avatar" class="w-8 h-8 rounded-full">
+          </div>
+        </div>
+      </header>
     <section >
 
         <img src="" alt="">
@@ -58,7 +49,8 @@
         <p class="m-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti atque, minus ex, itaque, cupiditate quibusdam consequatur odio vitae molestiae dolore magni earum maxime! Dolorum, fuga quo earum blanditiis expedita amet.
         Perferendis, voluptas dicta alias itaque labore vitae quod totam molestiae modi quia sequi maxime nesciunt, quo est minima sit laudantium ullam? At iusto exercitationem sequi quaerat veniam totam quo repudiandae.
         Quos ipsa sunt rem accusantium tempore sequi obcaecati minima recusandae maxime eveniet? Inventore quo veritatis iste dignissimos repellendus recusandae provident ipsam debitis, nemo voluptates, nobis eius, corrupti tenetur libero nostrum.</p>
-        <button class="border border-gray-200 m-2">Claim Item</button>
+        <button type="claimitem" id="claimitem" class="bg-black text-white py-2 px-4 rounded mt-4 m-5">Claim Item</button>        
+        
     </section>
     <script src='script.js' defer></script>
     

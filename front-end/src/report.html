@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <link href="output.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="bg-black flex justify-between items-center p-4 rounded-tr">
+        <div class="flex items-center">
+          <h1 class="text-white text-lg font-bold">Lost and Found</h1>
+          <div class="ml-4">
+            <input type="text" placeholder="Find something" class="py-2 px-4 rounded-lg text-black">
+          </div>
+        </div>
+        <div class="flex items-center">
+          <a href="#" class="text-green-500 font-semibold hover:underline">Report Lost</a>
+          <a href="#" class="ml-4 text-white hover:underline">Dashboard</a>
+          <div class="ml-4">
+            <img src="Assets/profile.jpg" alt="Profile Avatar" class="w-8 h-8 rounded-full">
+          </div>
+        </div>
+      </header>
+    <div class="container mx-auto py-8 shadow-lg">
+        <h2 class="text-2xl font-bold">Report</h2>
+        <form action="#" method="post" enctype="multipart/form-data" class="max-w-sm">
+            <label for="category" class="block mt-4">Category:</label>
+            <select id="category" class="border border-gray-300 rounded px-2 py-1 mt-1 w-full">
+                <option value="" disabled selected>Select category</option>
+                <option value="Id">Id</option>
+                <option value="key">Key</option>
+                <option value="cable">Cable</option>
+            </select>
+            <div>
+                <label for="foundon" class="block mt-4">Found on:</label>
+                <input type="text" id="foundon" name="foundon" required class="border border-gray-300 rounded px-2 py-1 mt-1 w-full">
+
+                <label for="foundat" class="block mt-4">Found at:</label>
+                <input type="text" id="foundat" name="foundat" required class="border border-gray-300 rounded px-2 py-1 mt-1 w-full">
+
+                <label for="location" class="block mt-4">Location:</label>
+                <input type="tel" id="location" name="location" required class="border border-gray-300 rounded px-2 py-1 mt-1 w-full">
+
+            </div>
+            
+            
+
+            <!-- Picture Section -->
+            <label for="picture" class="block mt-4">Upload Picture:</label>
+            <input type="file" id="picture" name="picture" accept="image/*" class="border border-gray-300 rounded px-2 py-1 mt-1 w-full">
+
+            <!-- Description Section -->
+            <label for="description" class="block mt-4">Description:</label>
+            <textarea id="description" name="description" rows="4" required class="border border-gray-300 rounded px-2 py-1 mt-1 w-full"></textarea>
+
+            <!-- Buttons -->
+            <button type="submit" id="postButton" class="bg-black text-white py-2 px-4 rounded mt-4 m-5">Post</button>
+            <button type="button" class="cancel bg-red-500 text-black py-2 px-4 rounded mt-4">Cancel</button>
+        </form>
+    </div>
+
+</body>
+</html>

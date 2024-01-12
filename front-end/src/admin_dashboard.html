@@ -3,38 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./dist/output.css" rel ="stylesheet">
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-   
-    <title>Document</title> 
+    <link href="output.css" rel="stylesheet" />
+    <title>Admin Dashboard</title> 
 </head>
 
 <body>
-    <header class="flex items-center justify-between p-4 bg-gray-200">
+  
+    <header class="bg-black flex justify-between items-center p-4 rounded-tr">
         <div class="flex items-center">
-          <h1 class="text-xl font-bold">Lost and Found</h1>
-        </div>
-        
-        <div class="flex items-center justify-center flex-grow">
-          <input type="text" placeholder="Search" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
-        
-        <nav class="flex items-center space-x-4 md:space-x-8">
-          <a href="#" class="hidden md:block">Report Lost</a>
-          <a href="#" class="hidden md:block">Dashboard</a>
-          <div class="md:hidden">
-            <button type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
+          <h1 class="text-white text-lg font-bold">Lost and Found</h1>
+          <div class="ml-4">
+            <input type="text" placeholder="Find something" class="py-2 px-4 rounded-lg text-black">
           </div>
-        </nav>
-        
-        <img src="./images/coffee2.png" alt="Logo" class="w-8 h-8 ml-4">
+        </div>
+        <div class="flex items-center">
+            <a href="#" class=" text-white font-semibold hover:underline">Report Lost</a>
+            <a href="#" class="ml-4 text-green-500 hover:underline">Dashboard</a>
+          <div class="ml-4">
+            <img src="Assets/profile.jpg" alt="Profile Avatar" class="w-8 h-8 rounded-full">
+          </div>
+        </div>
       </header>
       
       <div id="mobile-menu" class="hidden md:hidden">
@@ -44,12 +32,12 @@
         </div>
       </div>
       
-    <div class="flex items-center justify-center min-h-screen container mx-auto">
+    <div class="flex items-center justify-center min-h-screen container mx-auto bg-neutral-50 shadow-lg">
         <div class = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             
             
             
-            <div class="card">
+            <div class="card m-2 rounded  bg-slate-200 ">
                 <div class="p-5 flex flex-col">
                     <div class ="rounded-xl overflow-hidden">
                         <img src ="./images/coffee.png" alt =""/>
@@ -58,11 +46,11 @@
                     <p class ="text-slate-500 text-lg mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam, at voluptate reiciendis voluptatum magni quidem sapiente. Quam excepturi repellendus minima beatae, enim consequatur 
                         eos molestiae eligendi cupiditate itaque delectus.</p>
                     <div class ="flex justify-end">
-                <a href ="#" class="text-center  bg-blue-400 text-blue-700 py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</a>
+                <a href ="#" class="text-center  bg-black text-white py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</a>
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card bg-slate-200 m-2 rounded">
                 <div class="p-5 flex flex-col">
                     <div class ="rounded-xl overflow-hidden">
                         <img src ="./images/coffee.png" alt =""/>
@@ -71,11 +59,11 @@
                     <p class ="text-slate-500 text-lg mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam, at voluptate reiciendis voluptatum magni quidem sapiente. Quam excepturi repellendus minima beatae, enim consequatur 
                         eos molestiae eligendi cupiditate itaque delectus.</p>
                     <div class ="flex justify-end">
-                <a href ="#" class="text-center  bg-blue-400 text-blue-700 py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</a>
+                <a href ="#" class="text-center  bg-black text-white py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</a>
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card  bg-slate-200 m-2 rounded">
                 <div class="p-5 flex flex-col">
                     <div class ="rounded-xl overflow-hidden">
                         <img src ="./images/coffee.png" alt =""/>
@@ -84,7 +72,7 @@
                     <p class ="text-slate-500 text-lg mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam, at voluptate reiciendis voluptatum magni quidem sapiente. Quam excepturi repellendus minima beatae, enim consequatur 
                         eos molestiae eligendi cupiditate itaque delectus.</p>
                     <div class ="flex justify-end">
-                <button  class="delete-buttontext-center  bg-blue-400 text-blue-700 py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</button>
+                <button  class="delete-buttontext-center  bg-black text-white py-2 rounded-lg font-semibold mt-4 hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out w-20">Delete</button>
                     </div>
                 </div>
             </div>
