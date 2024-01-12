@@ -26,7 +26,6 @@
 /// <reference types="mongoose/types/inferschematype" />
 export declare class items {
     description: string;
-    category: string;
     picture: Buffer;
 }
 export declare const ItemsSchema: import("mongoose").Schema<items, import("mongoose").Model<items, any, any, any, import("mongoose").Document<unknown, any, items> & items & {

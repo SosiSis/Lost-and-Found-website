@@ -8,5 +8,5 @@ export declare class ItemsController {
     getAllitems(): Promise<items[]>;
     createItem(description: string, file: Express.Multer.File): Promise<items>;
     updateItem(id: string, updateData: updateItemDto): Promise<items>;
-    deleteItem(id: string): Promise<any>;
+    deleteItem(id: string): Promise<items>;
 }

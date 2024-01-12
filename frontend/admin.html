@@ -9,14 +9,15 @@
 </head>
 
 <body>
-  <header class="flex items-center justify-between p-4 bg-gray-200">
+  <header class="flex items-center justify-between p-4 bg-black rounded-b-lg">
     <div class="flex items-center">
-        <h1 class="text-xl font-bold">Lost and Found</h1>
+        <h1 class="text-xl font-bold text-white">Lost and Found</h1>
     </div>
     
     <nav class="flex items-center space-x-4 md:space-x-8">
-        <a href="report.html" class="hidden md:block">Report Lost</a>
-        <a href="accountUser.html" class="hidden md:block">Dashboard</a>
+        <a href="javascript:void(0);" class="hidden md:block text-white" id="reportLink">Report Lost</a>
+
+        <a href="#" class="hidden md:block text-white">Dashboard</a>
         <div class="md:hidden">
             <button type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +27,6 @@
         </div>
     </nav>
     
-    <a href="profile.html"><img src="./images/coffee2.png" alt="Logo" class="w-8 h-8 ml-4"></a>
 </header>
       
       <div id="mobile-menu" class="hidden md:hidden">
@@ -90,18 +90,21 @@
                   <p class="text-2l  font-medium mt-3">${description}</p>
               
                   <div class="flex justify-between items-center mt-4">
-                  <button class="icon-button">
+                    <button class="edit-button text-center bg-green-400 text-green-700 py-2 px-4 rounded-lg font-semibold hover:bg-green-300 focus:scale-95 transition-all duration-200 ease-out" data-id="${item._id}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                   </button>
-                  <button class="delete-button text-center bg-blue-400 text-blue-700 py-2 px-4 rounded-lg font-semibold hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out">Delete</button>
+                  <button class="delete-button text-center bg-blue-400 text-blue-700 py-2 px-4 rounded-lg font-semibold hover:bg-blue-300 focus:scale-95 transition-all duration-200 ease-out" data-id="${item._id}">Delete</button>
+
+
                   
                   </div>
                 </div>
               `;
   
               cardContainer.appendChild(card);
+              addDeleteEventListeners();
             });
           })
           .catch(error => {
@@ -110,18 +113,83 @@
       }
       function addDeleteEventListeners() {
     document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
+        button.addEventListener('click', () => {
+            const id = button.dataset.id; // Get the item ID from a data attribute
             deleteItem(id);
         });
     });
+
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.dataset.id; // Get the item ID from a data attribute
+            editItem(id); // Call the editItem function with the ID
+        });
+    });
+
 }
 
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get the "Report" link element
+        const reportLink = document.getElementById('reportLink');
+        
+        // Add a click event listener to open the pop-up window
+        reportLink.addEventListener('click', () => {
+            // Customize the pop-up window properties as needed (width, height, etc.)
+            const popUpWindow = window.open('report.html', 'ReportPage', 'width=600,height=800');
+            
+            // Prevent the default behavior (navigating to "report.html")
+            event.preventDefault();
+        });
+
+        // Load the initial data or perform other actions
+        getCards();
+    });
+
+
+  function editItem(id) {
+    // Prompt the user for the new description
+    const newDescription = prompt('Enter the new description:');
+
+    // Check if the user provided a new description
+    if (newDescription !== null) {
+        // Construct the update data object with the new description
+        const updateData = {
+            description: newDescription,
+        };
+
+        // Send a PUT request to update the item
+        fetch(`http://localhost:3000/items/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error in updating');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Item updated successfully:', data);
+            // Implement any necessary UI updates here
+        })
+        .catch(error => {
+            console.error('Failed to update item:', error);
+        });
+    }
+}
+
+
+
 function deleteItem(id) {
+    console.log('Deleting item with ID:', id);
     fetch(`http://localhost:3000/items/${id}`, {
         method: 'DELETE'
     })
     .then(response => {
+        console.log('Response status:', response.status);
         if (!response.ok) {
             throw new Error('Error in deletion');
         }
@@ -133,11 +201,11 @@ function deleteItem(id) {
     })
     .catch(error => {
         console.error('Failed to delete item:', error);
-    });}
+    });
+}
 
-  document.getElementById("profile").addEventListener("click", function() {
-    location.href = "personal_prof.html";
-  });
+
+
 </script>
 </body>
 </html>

@@ -19,10 +19,6 @@ __decorate([
     __metadata("design:type", String)
 ], items.prototype, "description", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], items.prototype, "category", void 0);
-__decorate([
     (0, mongoose_1.Prop)({ type: Buffer }),
     __metadata("design:type", Buffer)
 ], items.prototype, "picture", void 0);

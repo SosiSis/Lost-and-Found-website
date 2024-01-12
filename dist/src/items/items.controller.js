@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsController = void 0;
 const common_1 = require("@nestjs/common");
 const file_interceptor_1 = require("@nestjs/platform-express/multer/interceptors/file.interceptor");
-const role_decorator_1 = require("../auth/roles/role.decorator");
 const update_item_dto_1 = require("./dto/update-item.dto");
 const items_service_1 = require("./items.service");
 let ItemsController = class ItemsController {
@@ -28,7 +27,6 @@ let ItemsController = class ItemsController {
     async createItem(description, file) {
         const createdItem = await this.itemsService.create({
             description, picture: file.buffer,
-            category: ''
         });
         return createdItem;
     }
@@ -57,7 +55,6 @@ __decorate([
 ], ItemsController.prototype, "createItem", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, role_decorator_1.Roles)('admin'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -66,7 +63,6 @@ __decorate([
 ], ItemsController.prototype, "updateItem", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, role_decorator_1.Roles)('admin'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

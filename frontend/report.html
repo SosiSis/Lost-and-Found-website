@@ -5,56 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost and Found Report</title>
     <link href="dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 </head>
 <body class="font-sans">
 
-  <header class="flex items-center justify-between p-4 bg-gray-200">
+  <header class="flex items-center justify-between p-4 bg-black rounded-b-lg">
     <div class="flex items-center">
-        <h1 class="text-xl font-bold">Lost and Found</h1>
+        <h1 class="text-xl font-bold text-white">Lost and Found</h1>
     </div>
     
-    
     <nav class="flex items-center space-x-4 md:space-x-8">
-        <a href="report.html" class="hidden md:block">Report Lost</a>
-        <a href="accountUser.html" class="hidden md:block">Dashboard</a>
+        <a href="report.html" class="hidden md:block text-white">Report Lost</a>
+        <a href="accountUser.html" class="hidden md:block text-white">Dashboard</a>
         <div class="md:hidden">
             <button type="button" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        
             </button>
         </div>
     </nav>
     
 </header>
+      
 
 
-    <div class=" mx-auto bg-white p-6 rounded shadow w-96">
-        <h2 class="text-lg font-semibold mb-4">Report Item</h2>
-        <form id="userForm" method="post" enctype="multipart/form-data">
-            <!-- Description Section -->
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description:</label>
-            <textarea id="description" name="description" rows="4" required class="block w-full p-2 border border-gray-300 rounded mb-3"></textarea>
+<style>
+  /* Add custom font styles */
+  body {
+    font-family: "Arial", sans-serif;
+  }
 
-            <!-- Picture Section -->
-            <label for="picture" class="block text-sm font-medium text-gray-700 mb-1">Upload Picture:</label>
-            <input type="file" id="picture" name="picture" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100">
+  .repo {
+    font-family: "Sofia", sans-serif;
+    font-size: 2rem;
+    
+  }
 
-            <!-- Buttons -->
-            <button type="button" onclick="submitForm()" id="postButton" class="mt-3 bg-blue-400 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post</button>
-            <button type="button" class="mt-3 bg-red-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2 cancel" id="cancelButton">Cancel</button>
-        </form>
+  h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+  }
+
+  textarea,
+  input[type="file"] {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  .button {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  /* Change card color to brown */
+  .bg-brown {
+    background-color:rgb(219, 218, 240);
+  }
+
+  /* Adjust card size */
+  .card-container {
+    width: 70%;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+</style>
+
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-brown card-container rounded-lg shadow-lg">
+    <div class="text-center">
+      <h1 class="text-4xl font-semibold mb-4 repo">Report Item</h1>
     </div>
-  
-    <script>
-      // Your existing JavaScript
-    </script>
+    <form id="userForm" method="post" enctype="multipart/form-data">
+      <!-- Picture Section -->
+      <div class="mb-8">
+        <label for="picture" class="block text-sm font-medium text-gray-700 mb-2">Upload Picture:</label>
+        <input type="file" id="picture" name="picture" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" onchange="previewImage(event)">
+        <img id="imagePreview" class="mt-2" src="#" alt="Preview" style="display: none; max-width: 100%; max-height: 200px;">
+      </div>
+
+      <!-- Description Section -->
+      <div class="mb-8">
+        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description:</label>
+        <textarea id="description" name="description" rows="3" required class="block w-full p-2 border border-gray-300 rounded"></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-center space-x-4">
+        <button type="button" onclick="submitForm()" id="postButton" class="mt-3 bg-blue-400 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline button">Post</button>
+        <button type="button" class="mt-3 bg-red-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline button" id="cancelButton">Cancel</button>
+      </div>
+      
+    </form>
+  </div>
+</div>
+
     
 </body>
 </html>
 
-  
     <script>
+    function previewImage(event) {
+    var input = event.target;
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('imagePreview').src = e.target.result;
+        document.getElementById('imagePreview').style.display = 'block';
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
       function submitForm() {
         const formData = new FormData(document.getElementById('userForm'));
     
