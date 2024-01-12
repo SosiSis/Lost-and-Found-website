@@ -1,7 +1,7 @@
 # Web-Group-Asssignment
 # Lost and Found Website
 ## Group members
-Admin account email sosinasisay30 
+Admin account email sosinasisay30@gmail.com
 | No | Name | ID |Section|
 | ------ | ------ | ------ |------ |
 |1| Meazi Taele | UGR/6378/14| 2|
