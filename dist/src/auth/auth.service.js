@@ -18,7 +18,6 @@ const jwt_1 = require("@nestjs/jwt");
 const mongoose_1 = require("@nestjs/mongoose");
 const bcrypt = require("bcryptjs");
 const mongoose_2 = require("mongoose");
-const user_schema_1 = require("./schemas/user.schema");
 let AuthService = class AuthService {
     constructor(userModel, jwtService) {
         this.userModel = userModel;
@@ -75,7 +74,7 @@ let AuthService = class AuthService {
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(user_schema_1.user.name)),
+    __param(0, (0, mongoose_1.InjectModel)('user')),
     __metadata("design:paramtypes", [mongoose_2.Model,
         jwt_1.JwtService])
 ], AuthService);

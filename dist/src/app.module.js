@@ -27,7 +27,7 @@ exports.AppModule = AppModule = __decorate([
                 envFilePath: '.env',
                 isGlobal: true,
             }),
-            mongoose_1.MongooseModule.forRoot(process.env.DB_URL),
+            mongoose_1.MongooseModule.forRoot("mongodb://0.0.0.0:27017/lost_and_found"),
             user_module_1.UserModule,
             items_module_1.ItemsModule,
             auth_module_1.AuthModule

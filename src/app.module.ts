@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './auth/roles/role.guard';
 import { ItemsModule } from './items/items.module';
 import { UserModule } from './user/user.module';
+import { CommentsModule } from './comments/comments.module';
 
 
 @Module({
@@ -16,10 +17,12 @@ import { UserModule } from './user/user.module';
       envFilePath:'.env',
       isGlobal:true,
     }),
-    MongooseModule.forRoot(process.env.DB_URL),
+    MongooseModule.forRoot("mongodb://0.0.0.0:27017/lost_and_found"),
     UserModule,
     ItemsModule,
-    AuthModule],
+    AuthModule,
+    CommentsModule],
+    
     
   controllers: [AppController],
   providers: [AppService,{

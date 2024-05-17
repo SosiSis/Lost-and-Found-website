@@ -37,7 +37,7 @@
             if (email === 'admin@gmail.com' && password === 'admin123') {
                 window.location.href = 'admin.html';
             } else {
-                fetch('http://localhost:3000/auth/login', {
+                fetch('http://localhost:3003/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

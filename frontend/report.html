@@ -110,12 +110,15 @@
 </html>
 
     <script>
+        const formData = new FormData();
+        console.log(formData.append("description",document.getElementById('description')))
     function previewImage(event) {
     var input = event.target;
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById('imagePreview').src = e.target.result;
+        console.log(e.target.result)
         document.getElementById('imagePreview').style.display = 'block';
       }
       reader.readAsDataURL(input.files[0]);
@@ -124,8 +127,8 @@
 
       function submitForm() {
         const formData = new FormData(document.getElementById('userForm'));
-    
-        fetch('http://localhost:3000/items', {
+        console.log(formData)
+        fetch('http://localhost:3003/items', {
           method: 'POST',
           body: formData,
         })

@@ -4,7 +4,6 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInter
 import { FileInterceptor } from '@nestjs/platform-express/multer/interceptors/file.interceptor';
 import { updateItemDto } from './dto/update-item.dto'; // Assume you have a DTO for updating items
 import { ItemsService } from './items.service';
-
 @Controller('items')
 export class ItemsController {
   constructor(private itemsService: ItemsService) {}
@@ -13,7 +12,6 @@ export class ItemsController {
   async getAllitems(): Promise<items[]> {
     return this.itemsService.findAll();
   }
-
   @Post()
   @UseInterceptors(FileInterceptor('picture'))
   async createItem(

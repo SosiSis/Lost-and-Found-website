@@ -23,9 +23,8 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Model } from 'mongoose';
-import { Strategy } from 'passport-jwt';
 import { user } from './schemas/user.schema';
-declare const JwtStrategy_base: new (...args: any[]) => Strategy;
+declare const JwtStrategy_base: new (...args: any[]) => any;
 export declare class JwtStrategy extends JwtStrategy_base {
     private userModel;
     constructor(userModel: Model<user & Document>);

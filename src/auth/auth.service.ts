@@ -11,12 +11,10 @@ import { user } from './schemas/user.schema';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(user.name)
-    private userModel:Model<user>,
-    private jwtService:JwtService
-
-
-  ){}
+    @InjectModel('user')
+    private userModel: Model<user>,
+    private jwtService: JwtService
+  ) {}
 
 
 
