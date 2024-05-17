@@ -4,7 +4,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInter
 import { FileInterceptor } from '@nestjs/platform-express/multer/interceptors/file.interceptor';
 
 import { CommentsService } from './comments.service';
-@Controller('items')
+@Controller('comments')
 export class CommentsController {
   constructor(private commentsService: CommentsService) {}
 
