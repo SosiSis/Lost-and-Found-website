@@ -1,16 +1,10 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-
-@Schema({
-  timestamps:true
-})
-export class comments{
-
-  @Prop()
-  comment:string;
-
-
-  
+@Schema({ timestamps: true })
+export class Comment extends Document {
+  @Prop({ required: true })
+  comment: string;
 }
 
-export const CommentsSchema = SchemaFactory.createForClass(comments)
+export const CommentSchema = SchemaFactory.createForClass(Comment);

@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './auth/roles/role.guard';
 import { ItemsModule } from './items/items.module';
 import { UserModule } from './user/user.module';
-import { CommentsModule } from './comments/comments.module';
+import { CommentModule } from './comments/comment.module';
 
 
 @Module({
@@ -21,7 +21,7 @@ import { CommentsModule } from './comments/comments.module';
     UserModule,
     ItemsModule,
     AuthModule,
-    CommentsModule],
+    CommentModule],
     
     
   controllers: [AppController],

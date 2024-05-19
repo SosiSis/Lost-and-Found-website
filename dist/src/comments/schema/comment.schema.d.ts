@@ -21,16 +21,13 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
+/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import mongoose from 'mongoose';
-import { comments } from './schema/comment.schema';
-export declare class CommentsService {
-    private commentsModel;
-    constructor(commentsModel: mongoose.Model<comments>);
-    findAll(): Promise<(mongoose.Document<unknown, {}, comments> & comments & {
-        _id: mongoose.Types.ObjectId;
-    })[]>;
-    create(comments: comments): Promise<comments>;
-    update(id: string): Promise<comments>;
-    remove(id: string): Promise<any>;
+export declare class comments {
+    comment: string;
 }
+export declare const CommentsSchema: import("mongoose").Schema<comments, import("mongoose").Model<comments, any, any, any, import("mongoose").Document<unknown, any, comments> & comments & {
+    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, comments, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<comments>> & import("mongoose").FlatRecord<comments> & {
+    _id: import("mongoose").Types.ObjectId;
+}>;
