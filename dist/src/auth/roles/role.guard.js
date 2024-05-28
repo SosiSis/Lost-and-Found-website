@@ -12,21 +12,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
-const role_decorator_1 = require("./role.decorator");
+const jwt = require("jsonwebtoken");
 let RolesGuard = class RolesGuard {
     constructor(reflector) {
         this.reflector = reflector;
     }
     canActivate(context) {
-        const requiredRoles = this.reflector.getAllAndOverride(role_decorator_1.ROLES_KEY, [
+        const requiredRoles = this.reflector.getAllAndOverride('roles', [
             context.getHandler(),
             context.getClass(),
         ]);
         if (!requiredRoles) {
             return true;
         }
-        const { user } = context.switchToHttp().getRequest();
-        return requiredRoles.some((role) => user.roles?.includes(role));
+        const request = context.switchToHttp().getRequest();
+        const authorizationHeader = request.headers.authorization;
+        if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
+            const token = authorizationHeader.substring(7);
+            try {
+                const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+                const user_role = decodedToken.roles;
+                const user_id = decodedToken.id;
+                console.log(user_role);
+                console.log(user_id);
+                if (!user_role) {
+                    return false;
+                }
+                const userRoles = Array.isArray(user_role) ? user_role : [user_role];
+                const hasRequiredRoles = requiredRoles.some((role) => userRoles.includes(role));
+                return hasRequiredRoles;
+            }
+            catch (error) {
+                console.error('Token verification failed:', error.message);
+                throw new common_1.UnauthorizedException('Invalid token');
+            }
+        }
+        else {
+            throw new common_1.UnauthorizedException('No JWT Token found in the Authorization header');
+        }
     }
 };
 exports.RolesGuard = RolesGuard;

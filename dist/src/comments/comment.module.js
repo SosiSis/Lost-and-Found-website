@@ -6,20 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentsModule = void 0;
+exports.CommentModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const comments_controller_1 = require("./comments.controller");
-const comments_service_1 = require("./comments.service");
 const comment_schema_1 = require("./schema/comment.schema");
-let CommentsModule = class CommentsModule {
+const comment_service_1 = require("./comment.service");
+const comment_controller_1 = require("./comment.controller");
+let CommentModule = class CommentModule {
 };
-exports.CommentsModule = CommentsModule;
-exports.CommentsModule = CommentsModule = __decorate([
+exports.CommentModule = CommentModule;
+exports.CommentModule = CommentModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: 'items', schema: comment_schema_1.CommentsSchema }])],
-        controllers: [comments_controller_1.CommentsController],
-        providers: [comments_service_1.CommentsService]
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]),
+        ],
+        providers: [comment_service_1.CommentService],
+        controllers: [comment_controller_1.CommentController],
     })
-], CommentsModule);
-//# sourceMappingURL=comments.module.js.map
+], CommentModule);
+//# sourceMappingURL=comment.module.js.map

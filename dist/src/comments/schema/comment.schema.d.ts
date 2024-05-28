@@ -21,13 +21,13 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
-/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-export declare class comments {
+import { Document } from 'mongoose';
+export declare class Comment extends Document {
     comment: string;
 }
-export declare const CommentsSchema: import("mongoose").Schema<comments, import("mongoose").Model<comments, any, any, any, import("mongoose").Document<unknown, any, comments> & comments & {
+export declare const CommentSchema: import("mongoose").Schema<Comment, import("mongoose").Model<Comment, any, any, any, Document<unknown, any, Comment> & Comment & {
     _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, comments, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<comments>> & import("mongoose").FlatRecord<comments> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Comment, Document<unknown, {}, import("mongoose").FlatRecord<Comment>> & import("mongoose").FlatRecord<Comment> & {
     _id: import("mongoose").Types.ObjectId;
 }>;

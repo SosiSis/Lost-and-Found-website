@@ -12,42 +12,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentsService = void 0;
+exports.CommentService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const comment_schema_1 = require("./schema/comment.schema");
-let CommentsService = class CommentsService {
-    constructor(commentsModel) {
-        this.commentsModel = commentsModel;
+let CommentService = class CommentService {
+    constructor(commentModel) {
+        this.commentModel = commentModel;
+    }
+    async create(createCommentDto) {
+        const createdComment = new this.commentModel(createCommentDto);
+        return createdComment.save();
     }
     async findAll() {
-        const comments = await this.commentsModel.find();
-        return comments;
+        return this.commentModel.find().exec();
     }
-    async create(comments) {
-        const res = await this.commentsModel.create(comments);
-        return res;
-    }
-    async update(id) {
-        const updatedComment = await this.commentsModel.findByIdAndUpdate(id, { new: true }).exec();
-        if (!updatedComment) {
-            throw new common_1.NotFoundException(`Item with ID "${id}" not found`);
+    async findOne(id) {
+        const comment = await this.commentModel.findById(id).exec();
+        if (!comment) {
+            throw new common_1.NotFoundException(`Comment with ID "${id}" not found`);
         }
-        return updatedComment;
+        return comment;
     }
-    async remove(id) {
-        const result = await this.commentsModel.findByIdAndDelete(id).exec();
+    async update(id, updateCommentDto) {
+        const result = await this.commentModel.findByIdAndUpdate(id, updateCommentDto, { new: true }).exec();
         if (!result) {
-            throw new common_1.NotFoundException(`Item with ID "${id}" not found`);
+            throw new common_1.NotFoundException(`Comment with ID "${id}" not found`);
         }
         return result;
     }
 };
-exports.CommentsService = CommentsService;
-exports.CommentsService = CommentsService = __decorate([
+exports.CommentService = CommentService;
+exports.CommentService = CommentService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(comment_schema_1.comments.name)),
-    __metadata("design:paramtypes", [mongoose_2.default.Model])
-], CommentsService);
-//# sourceMappingURL=comments.service.js.map
+    __param(0, (0, mongoose_1.InjectModel)(comment_schema_1.Comment.name)),
+    __metadata("design:paramtypes", [mongoose_2.Model])
+], CommentService);
+//# sourceMappingURL=comment.service.js.map

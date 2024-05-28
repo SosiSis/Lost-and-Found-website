@@ -16,6 +16,7 @@ const auth_controller_1 = require("./auth.controller");
 const auth_service_1 = require("./auth.service");
 const jwt_strategy_1 = require("./jwt.strategy");
 const user_schema_1 = require("./schemas/user.schema");
+const jwt_auth_guard_1 = require("./jwt-auth.guard");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -37,8 +38,8 @@ exports.AuthModule = AuthModule = __decorate([
             mongoose_1.MongooseModule.forFeature([{ name: 'user', schema: user_schema_1.UserSchema }]),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [jwt_strategy_1.JwtStrategy, auth_service_1.AuthService],
-        exports: [jwt_strategy_1.JwtStrategy, passport_1.PassportModule]
+        providers: [jwt_strategy_1.JwtStrategy, auth_service_1.AuthService, jwt_auth_guard_1.JwtAuthGuard],
+        exports: [jwt_strategy_1.JwtStrategy, passport_1.PassportModule, jwt_auth_guard_1.JwtAuthGuard]
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

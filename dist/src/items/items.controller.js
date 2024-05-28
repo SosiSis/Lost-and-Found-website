@@ -17,6 +17,10 @@ const common_1 = require("@nestjs/common");
 const file_interceptor_1 = require("@nestjs/platform-express/multer/interceptors/file.interceptor");
 const update_item_dto_1 = require("./dto/update-item.dto");
 const items_service_1 = require("./items.service");
+const passport_1 = require("@nestjs/passport");
+const role_guard_1 = require("../auth/roles/role.guard");
+const role_decorator_1 = require("../auth/roles/role.decorator");
+const role_enum_1 = require("../auth/roles/role.enum");
 let ItemsController = class ItemsController {
     constructor(itemsService) {
         this.itemsService = itemsService;
@@ -39,6 +43,7 @@ let ItemsController = class ItemsController {
 };
 exports.ItemsController = ItemsController;
 __decorate([
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -63,6 +68,8 @@ __decorate([
 ], ItemsController.prototype, "updateItem", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), role_guard_1.RolesGuard),
+    (0, role_decorator_1.Roles)(role_enum_1.Role.Admin),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

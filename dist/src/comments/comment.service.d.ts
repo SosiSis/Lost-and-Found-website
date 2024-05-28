@@ -22,15 +22,15 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import mongoose from 'mongoose';
-import { comments } from './schema/comment.schema';
-export declare class CommentsService {
-    private commentsModel;
-    constructor(commentsModel: mongoose.Model<comments>);
-    findAll(): Promise<(mongoose.Document<unknown, {}, comments> & comments & {
-        _id: mongoose.Types.ObjectId;
-    })[]>;
-    create(comments: comments): Promise<comments>;
-    update(id: string): Promise<comments>;
-    remove(id: string): Promise<any>;
+import { Model } from 'mongoose';
+import { Comment } from './schema/comment.schema';
+import { CreateCommentDto } from './dto/create-comment.dto';
+import { UpdateCommentDto } from './dto/update-comment.dto';
+export declare class CommentService {
+    private readonly commentModel;
+    constructor(commentModel: Model<Comment>);
+    create(createCommentDto: CreateCommentDto): Promise<Comment>;
+    findAll(): Promise<Comment[]>;
+    findOne(id: string): Promise<Comment>;
+    update(id: string, updateCommentDto: UpdateCommentDto): Promise<Comment>;
 }

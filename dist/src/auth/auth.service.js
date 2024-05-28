@@ -16,8 +16,8 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const mongoose_1 = require("@nestjs/mongoose");
-const bcrypt = require("bcryptjs");
 const mongoose_2 = require("mongoose");
+const bcrypt = require("bcryptjs");
 let AuthService = class AuthService {
     constructor(userModel, jwtService) {
         this.userModel = userModel;
@@ -41,23 +41,23 @@ let AuthService = class AuthService {
             password: hashedPassword,
             roles,
         });
-        const token = this.jwtService.sign({ id: newUser._id, roles: newUser.roles });
+        const token = this.jwtService.sign({ id: newUser._id, roles: newUser.roles }, { secret: process.env.JWT_SECRET });
         return { token };
     }
     async login(loginDto) {
         const { email, password } = loginDto;
         if (email === process.env.ADMIN_EMAIL) {
-            if (await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH)) {
-                const adminUser = await this.userModel.findOne({ email }).exec();
-                if (!adminUser) {
-                    throw new common_1.UnauthorizedException('Admin user does not exist in the database.');
-                }
-                const adminToken = this.jwtService.sign({ id: adminUser._id, roles: adminUser.roles });
-                return { token: adminToken };
+            const adminUser = await this.userModel.findOne({ email }).exec();
+            if (!adminUser) {
+                throw new common_1.UnauthorizedException('Admin user does not exist in the database.');
             }
-            else {
+            console.log(process.env.ADMIN_PASSWORD_HASH, password);
+            const isPasswordMatched = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
+            if (!isPasswordMatched) {
                 throw new common_1.UnauthorizedException('Invalid email or password.');
             }
+            const adminToken = this.jwtService.sign({ id: adminUser._id, roles: adminUser.roles }, { secret: process.env.JWT_SECRET });
+            return { token: adminToken };
         }
         const user = await this.userModel.findOne({ email }).exec();
         if (!user) {
@@ -67,7 +67,7 @@ let AuthService = class AuthService {
         if (!isPasswordMatched) {
             throw new common_1.UnauthorizedException('Invalid email or password.');
         }
-        const token = this.jwtService.sign({ id: user._id, roles: user.roles });
+        const token = this.jwtService.sign({ id: user._id, roles: user.roles }, { secret: process.env.JWT_SECRET });
         return { token };
     }
 };

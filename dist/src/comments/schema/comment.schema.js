@@ -9,19 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentsSchema = exports.comments = void 0;
+exports.CommentSchema = exports.Comment = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
-let comments = class comments {
+const mongoose_2 = require("mongoose");
+let Comment = class Comment extends mongoose_2.Document {
 };
-exports.comments = comments;
+exports.Comment = Comment;
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
-], comments.prototype, "comment", void 0);
-exports.comments = comments = __decorate([
-    (0, mongoose_1.Schema)({
-        timestamps: true
-    })
-], comments);
-exports.CommentsSchema = mongoose_1.SchemaFactory.createForClass(comments);
+], Comment.prototype, "comment", void 0);
+exports.Comment = Comment = __decorate([
+    (0, mongoose_1.Schema)({ timestamps: true })
+], Comment);
+exports.CommentSchema = mongoose_1.SchemaFactory.createForClass(Comment);
 //# sourceMappingURL=comment.schema.js.map
