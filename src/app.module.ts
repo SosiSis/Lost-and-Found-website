@@ -17,12 +17,11 @@ import { CommentModule } from './comments/comment.module';
       envFilePath:'.env',
       isGlobal:true,
     }),
-    MongooseModule.forRoot("mongodb://0.0.0.0:27017/lost_and_found"),
+    MongooseModule.forRoot(process.env.DB_URL),
     UserModule,
     ItemsModule,
     AuthModule,
-    CommentModule],
-    
+    CommentModule ],
     
   controllers: [AppController],
   providers: [AppService,{

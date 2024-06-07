@@ -1,4 +1,8 @@
+import { ObjectId } from "mongoose";
+
 export class UpdateCommentDto {
-    readonly comment: string;
+  readonly content: string;
+  readonly postId: ObjectId;
+  readonly userId:ObjectId;
   }
   

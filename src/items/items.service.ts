@@ -11,12 +11,12 @@ export class ItemsService {
     private itemsModel:mongoose.Model<items>,
     ) {}
 
-    async findAll(){
-      const items = await this.itemsModel.find();
-      return items;
-
+    async findAll(): Promise<items[]> {
+      const items = await this.itemsModel.find().lean().exec();
+      return items.map(item => {
+        return { id: item._id.toString(),location:item.location, description: item.description, picture: item.picture ,category:item.category,time:item.time};
+      });
     }
-
     async create(items:items):Promise<items>{
       const res = await this.itemsModel.create(items)
       return res

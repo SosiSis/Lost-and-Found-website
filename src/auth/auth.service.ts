@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
+import { Model, ObjectId } from 'mongoose';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { user } from './schemas/user.schema';
@@ -10,12 +10,12 @@ import { user } from './schemas/user.schema';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel('user')
+    @InjectModel(user.name)
     private userModel: Model<user>,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
+  async signUp(signUpDto: SignUpDto): Promise<{ token: string; roles: string[] ;id: ObjectId }> {
     const { email, password } = signUpDto;
 
     let roles = ['user']; // Default role
@@ -24,7 +24,7 @@ export class AuthService {
     if (email === process.env.ADMIN_EMAIL) {
       const isPasswordMatched = await bcrypt.compare(
         password,
-        process.env.ADMIN_PASSWORD_HASH,
+        process.env.ADMIN_PASSWORD_HASH
       );
       if (isPasswordMatched) {
         roles = ['admin']; // Assign admin role
@@ -41,40 +41,28 @@ export class AuthService {
       roles,
     });
 
-    const token = this.jwtService.sign(
-      { id: newUser._id, roles: newUser.roles },
-      { secret: process.env.JWT_SECRET },
-    );
+    const token = this.jwtService.sign({ id: newUser._id, roles: newUser.roles,  });
 
-    return { token };
+    return { token, roles: newUser.roles, id: newUser._id };
   }
 
-  async login(loginDto: LoginDto): Promise<{ token: string }> {
+  async login(loginDto: LoginDto): Promise<{ token: string; roles: string[];id: ObjectId }> {
     const { email, password } = loginDto;
 
     // Check if the user is the admin
     if (email === process.env.ADMIN_EMAIL) {
-      const adminUser = await this.userModel.findOne({ email }).exec();
-      if (!adminUser) {
-        throw new UnauthorizedException('Admin user does not exist in the database.');
-      }
-    console.log(process.env.ADMIN_PASSWORD_HASH,password)
-    
-      const isPasswordMatched = await bcrypt.compare(
-        password,
-        process.env.ADMIN_PASSWORD_HASH,
-      );
+      if (await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH)) {
+        // Assuming the admin user exists in the database and has the role 'admin'
+        const adminUser = await this.userModel.findOne({ email }).exec();
+        if (!adminUser) {
+          throw new UnauthorizedException('Admin user does not exist in the database.');
+        }
 
-      if (!isPasswordMatched) {
+        const adminToken = this.jwtService.sign({ id: adminUser._id, roles: adminUser.roles });
+        return { token: adminToken, roles: adminUser.roles,id: adminUser._id  };
+      } else {
         throw new UnauthorizedException('Invalid email or password.');
       }
-
-      const adminToken = this.jwtService.sign(
-        { id: adminUser._id, roles: adminUser.roles },
-        { secret: process.env.JWT_SECRET },
-      );
-
-      return { token: adminToken };
     }
 
     // Handle regular user login
@@ -88,11 +76,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password.');
     }
 
-    const token = this.jwtService.sign(
-      { id: user._id, roles: user.roles },
-      { secret: process.env.JWT_SECRET },
-    );
-
-    return { token };
+    const token = this.jwtService.sign({ id: user._id, roles: user.roles });
+    return { token, roles: user.roles, id:user._id };
   }
 }

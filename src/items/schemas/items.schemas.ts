@@ -9,8 +9,15 @@ export class items{
   @Prop()
   description:string;
 
+  @Prop()
+  category:string;
+
   @Prop({type:Buffer})
   picture:Buffer;
+  @Prop()
+  location:string;
+  @Prop()
+  time:string;
   
 }
 
