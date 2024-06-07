@@ -40,6 +40,14 @@ export class CommentService {
     }
     return result as Comment;
   }
+  async remove(id: string): Promise<any> {
+    const result = await this.commentModel.findByIdAndDelete(id).exec();
 
+    if (!result) {
+      throw new NotFoundException(`Comment with ID "${id}" not found`);
+    }
+
+    return result;
+  }
   
 }
